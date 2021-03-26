@@ -624,16 +624,27 @@ awful.rules.rules = {
       }, properties = { floating = true, titlebars_enabled = false }
     },
 
-    -- Add titlebars to normal clients and dialogs
-    { rule_any = {type = { "normal", "dialog" } },
-      -- dxps> properties = { titlebars_enabled = true }
-      properties = { titlebars_enabled = false }
+    -- Add titlebars to normal clients.
+    { rule_any = {type = { "normal" } },
+      -- dxps> hide the titlebars, 
+      properties = { 
+          titlebars_enabled = false, 
+          placement = awful.placement.no_offscreen
+      }
     },
+
+    -- Open "dialog" windows as centered.
+    { rule_any = {type = { "dialog" } },
+      properties = { 
+          titlebars_enabled = false, 
+          placement = awful.placement.centered+awful.placement.no_offscreen
+      }
+    },
+
 	
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
-
 
 }
 -- }}}
