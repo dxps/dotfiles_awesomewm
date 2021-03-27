@@ -45,7 +45,6 @@ beautiful.init("/usr/share/awesome/themes/cesious/theme.lua")
 beautiful.icon_theme        = "Papirus-Dark"
 -- dxps>
 beautiful.bg_normal         = "#222D32"
-beautiful.bg_normal         = "#002B36"
 beautiful.bg_focus          = "#2C3940"
 beautiful.bg_systray        = "#002B36"
 beautiful.systray_icon_spacing = 1
