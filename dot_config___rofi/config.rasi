@@ -45,7 +45,7 @@ configuration {
     // Green
     green:       #86af80;
     lightgreen:  #88cc22;
-    darker1green:  #26A269;
+    darkergreen: #026B61;
     //
     // Yellow
     yellow:      #e8ae5b;
@@ -79,7 +79,7 @@ configuration {
     anchor:   center;
     transparency: "screenshot";
     padding: 10px;
-    width: 600px;
+    width: 550px;
     border:  0px;
     border-radius: 12px;
     color: @magenta;
@@ -95,24 +95,20 @@ configuration {
 }
 
 #message {
-    border-color: @foreground;
+    border-color: @darkergreen;
     border:  0px 2px 2px 2px;
-//    border-radius: 10px;
     padding: 5;
     background-color: @tcyan;
-}
-#message {
-    font: "xos4 Terminus 10";
-    color: @black;
+    color: @green;
 }
 
 #inputbar {
-    color: @yellow;
+    color: @cyan;
     padding: 11px;
     background-color: @black;
     border: 2px 2px 2px 2px;
     border-radius:  12px 12px 0px 0px;
-    border-color: @foreground;
+    border-color: @darkergreen;
     font: "FiraSansCondensed 16";
 }
 #entry,prompt,case-indicator {
@@ -122,8 +118,8 @@ configuration {
 #listview {
     padding: 8px;
     border-radius: 0px 0px 12px 12px;
-    border-color: @foreground;
-    border: 0px 2px 2px 2px;
+    border-color: @darkergreen;
+    border: 0px 1px 1px 1px;
     background-color: #1c1c1ccc;
     dynamic: false;
     lines: 10;
@@ -138,7 +134,7 @@ configuration {
     font:inherit;
 }
 #element selected.normal {
-    background-color: @darker1green;
+    background-color: @darkergreen;
 }
 #element normal active {
     foreground: @lightblue;
