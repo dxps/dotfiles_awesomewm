@@ -44,14 +44,16 @@ end
 beautiful.init("/usr/share/awesome/themes/cesious/theme.lua")
 beautiful.icon_theme        = "Papirus-Dark"
 -- dxps>
-beautiful.bg_normal         = "#222D32"
-beautiful.bg_focus          = "#2C3940"
-beautiful.bg_systray        = "#002B36"
+-- beautiful.bg_normal      = "#222D32"
+beautiful.bg_normal         = "#263238"
+beautiful.bg_focus          = "#263238"
+beautiful.bg_systray        = "#222D32"
+beautiful.fg_focus          = "#2EC27E"
 beautiful.systray_icon_spacing = 1
 beautiful.titlebar_close_button_normal = "/usr/share/awesome/themes/cesious/titlebar/close_normal_adapta.png"
 beautiful.titlebar_close_button_focus  = "/usr/share/awesome/themes/cesious/titlebar/close_normal.png"
-beautiful.font              = "Noto Sans Regular 12"
-beautiful.notification_font = "Noto Sans Regular 12"
+beautiful.font              = "FiraSansCondensed 14"
+beautiful.notification_font = "FiraSansCondensed 14"
 beautiful.wallpaper = "/home/dxps/dev/dxps-gh/design-assets/wallpapers/rust-lang/rust_dark_green_512x512_3.png"
 
 -- This is used later as the default terminal and editor to run.
@@ -118,13 +120,17 @@ myexitmenu = {
     { "reboot", "systemctl reboot", menubar.utils.lookup_icon("system-reboot") },
     { "shutdown", "poweroff", menubar.utils.lookup_icon("system-shutdown") }
 }
+mytoolsmenu = {
+    { "Typora", "/home/dxps/apps/bin/typora", "/home/dxps/.icons/Material-Black-Pistachio-Suru/apps/16/applications-publishing.svg" }
+}
 mymainmenu = freedesktop.menu.build({
-    icon_size = 32,
+    icon_size = 16,
     before = {
         { "Terminal", terminal, menubar.utils.lookup_icon("utilities-terminal") },
         { "Browser", browser, menubar.utils.lookup_icon("internet-web-browser") },
         { "Files", filemanager, menubar.utils.lookup_icon("system-file-manager") },
         -- other triads can be put here
+        { "My Tools", mytoolsmenu, "/home/dxps/.icons/Material-Black-Pistachio-Suru/apps/16/app-launcher.svg" },
     },
     after = {
         { "Awesome", myawesomemenu, "/usr/share/awesome/icons/awesome32.png" },
