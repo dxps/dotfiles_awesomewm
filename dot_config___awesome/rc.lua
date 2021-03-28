@@ -41,14 +41,13 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 -- Chosen colors and buttons look alike adapta maia theme
-beautiful.init("/usr/share/awesome/themes/cesious/theme.lua")
-beautiful.icon_theme        = "Papirus-Dark"
+beautiful.init("/home/dxps/.themes/cesious.dxps/theme.lua")
+beautiful.icon_theme        = "Material-Black-Pistachio-Suru"
 -- dxps>
--- beautiful.bg_normal      = "#222D32"
-beautiful.bg_normal         = "#263238"
-beautiful.bg_focus          = "#263238"
-beautiful.bg_systray        = "#222D32"
-beautiful.fg_focus          = "#2EC27E"
+beautiful.bg_normal         = "#003B4A"
+beautiful.bg_focus          = "#003B4A"
+beautiful.bg_systray        = "#002B36"
+beautiful.fg_focus          = "#2BD4C0"
 beautiful.systray_icon_spacing = 1
 beautiful.titlebar_close_button_normal = "/usr/share/awesome/themes/cesious/titlebar/close_normal_adapta.png"
 beautiful.titlebar_close_button_focus  = "/usr/share/awesome/themes/cesious/titlebar/close_normal.png"
@@ -120,17 +119,13 @@ myexitmenu = {
     { "reboot", "systemctl reboot", menubar.utils.lookup_icon("system-reboot") },
     { "shutdown", "poweroff", menubar.utils.lookup_icon("system-shutdown") }
 }
-mytoolsmenu = {
-    { "Typora", "/home/dxps/apps/bin/typora", "/home/dxps/.icons/Material-Black-Pistachio-Suru/apps/16/applications-publishing.svg" }
-}
 mymainmenu = freedesktop.menu.build({
-    icon_size = 16,
+    icon_size = 32,
     before = {
         { "Terminal", terminal, menubar.utils.lookup_icon("utilities-terminal") },
         { "Browser", browser, menubar.utils.lookup_icon("internet-web-browser") },
         { "Files", filemanager, menubar.utils.lookup_icon("system-file-manager") },
         -- other triads can be put here
-        { "My Tools", mytoolsmenu, "/home/dxps/.icons/Material-Black-Pistachio-Suru/apps/16/app-launcher.svg" },
     },
     after = {
         { "Awesome", myawesomemenu, "/usr/share/awesome/icons/awesome32.png" },
@@ -243,7 +238,7 @@ awful.screen.connect_for_each_screen(function(s)
 		layout = wibox.layout.fixed.vertical,
 		buttons = taglist_buttons,
 		style = {
-			font = "Inconsolata SemiCondensed"
+			font = "M+ 1mn"
 		},
 		widget_template = {
 			{
@@ -292,8 +287,8 @@ awful.screen.connect_for_each_screen(function(s)
                 },
                 layout = wibox.layout.fixed.horizontal,
             },
-            left  = 5,
-            right = 5,
+            left  = 2,
+            right = 2,
             widget = wibox.container.margin
         },
         id     = 'background_role',
@@ -308,7 +303,8 @@ awful.screen.connect_for_each_screen(function(s)
     -- Add widgets to the wibox
     local systray = wibox.widget.systray()
     -- dxps>
-    -- (added, but it seemns not relevant for the vertical setup) systray:set_base_size (24)
+    -- (added, but it seemns not relevant for the vertical setup) 
+    systray:set_base_size (28)
     systray:set_horizontal (false)
 
     s.mywibox:setup {
