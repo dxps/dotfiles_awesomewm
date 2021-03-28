@@ -46,7 +46,7 @@ beautiful.icon_theme        = "Material-Black-Pistachio-Suru"
 -- dxps>
 beautiful.bg_normal         = "#003B4A"
 beautiful.bg_focus          = "#003B4A"
-beautiful.bg_systray        = "#002B36"
+beautiful.bg_systray        = "#003B4A"
 beautiful.fg_focus          = "#2BD4C0"
 beautiful.systray_icon_spacing = 1
 beautiful.titlebar_close_button_normal = "/usr/share/awesome/themes/cesious/titlebar/close_normal_adapta.png"
@@ -141,7 +141,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock(" %H\n %M ")
+mytextclock = wibox.widget.textclock(" %H\n %M")
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
@@ -298,7 +298,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Create the wibox
     -- dxps> s.mywibox = awful.wibar({ position = "top", screen = s })
-    s.mywibox = awful.wibar({ position = "left", screen = s })
+    s.mywibox = awful.wibar({ position = "left", screen = s, width = 30 })
 
     -- Add widgets to the wibox
     local systray = wibox.widget.systray()
@@ -328,8 +328,6 @@ awful.screen.connect_for_each_screen(function(s)
                 systray,
             },
             mykeyboardlayout,
-            -- dxps>
-            -- separator,
             spacer,
             mytextclock,
             -- s.mylayoutbox,
