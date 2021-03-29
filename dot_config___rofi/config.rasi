@@ -78,7 +78,7 @@ configuration {
     location: center;
     anchor:   center;
     transparency: "screenshot";
-    padding: 10px;
+    padding: 0px;
     width: 550px;
     border:  0px;
     border-radius: 12px;
@@ -98,7 +98,7 @@ configuration {
     border-color: @darkergreen;
     border:  0px 2px 2px 2px;
     padding: 5;
-    background-color: @tcyan;
+    background-color: @cyan;
     color: @green;
 }
 
@@ -106,7 +106,7 @@ configuration {
     color: @cyan;
     padding: 11px;
     background-color: @black;
-    border: 2px 2px 2px 2px;
+    border: 1px 1px 1px 1px;
     border-radius:  12px 12px 0px 0px;
     border-color: @darkergreen;
     font: "FiraSansCondensed 16";
@@ -122,7 +122,7 @@ configuration {
     border: 0px 1px 1px 1px;
     background-color: #1c1c1ccc;
     dynamic: false;
-    lines: 10;
+    lines: 6;
 }
 #element {
     padding: 4px;
@@ -177,14 +177,19 @@ configuration {
     border: 0px 0px 0px 0px;
 }
 #button {
-    font: "FontAwesome 26";
-    padding: 6px;
-    border: 2px 0px 2px 2px;
+    // font: "FontAwesome 26";
+    font: "FontAwesome 1";
+    // padding: 6px;
+    padding: -1px;
+    // border: 2px 0px 2px 2px;
+    border: 0;
     border-radius: 4px 0px 0px 4px;
-    background-color: @tlightblack;
-    border-color: @foreground;
-    color: @foreground;
-    horizontal-align: 0.5;
+    background-color: @transparent;
+    // border-color: @foreground;
+    border-color: @transparent;
+    // color: @foreground;
+    color: @transparent;
+    horizontal-align: 0.2;
 }
 #button selected normal {
     color: @dark;
