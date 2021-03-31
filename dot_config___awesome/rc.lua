@@ -51,9 +51,9 @@ beautiful.fg_focus          = "#2BD4C0"
 beautiful.systray_icon_spacing = 1
 beautiful.titlebar_close_button_normal = "/usr/share/awesome/themes/cesious/titlebar/close_normal_adapta.png"
 beautiful.titlebar_close_button_focus  = "/usr/share/awesome/themes/cesious/titlebar/close_normal.png"
-beautiful.font              = "FiraSansCondensed 14"
-beautiful.notification_font = "FiraSansCondensed 14"
-beautiful.wallpaper = "/home/dxps/dev/dxps-gh/design-assets/wallpapers/rust-lang/rust_dark_green_512x512_3.png"
+beautiful.font              = "FiraSansCondensed 13"
+beautiful.notification_font = "FiraSansCondensed 13"
+beautiful.wallpaper = "/home/dxps/dev/dxps-gh/design-assets/wallpapers/rust-lang/rust_dark_green_512x512_3_darker.png"
 
 -- This is used later as the default terminal and editor to run.
 browser = "exo-open --launch WebBrowser" or "firefox"
@@ -133,15 +133,17 @@ mymainmenu = freedesktop.menu.build({
         -- other triads can be put here
     }
 })
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
+mylauncher = awful.widget.launcher({ 
+    image = "/home/dxps/.icons/Material-Black-Pistachio-Suru/actions/16/pan-end.svg", 
+    menu = mymainmenu })
+
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock(" %H\n %M")
+mytextclock = wibox.widget.textclock("  %H\n  %M")
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
@@ -205,7 +207,7 @@ local function set_wallpaper(s)
         end
         -- dxps>
         -- gears.wallpaper.maximized(wallpaper, s, true)
-        gears.wallpaper.centered(wallpaper, s, "#002B36")
+        gears.wallpaper.centered(wallpaper, s, "#00212C")
     end
 end
 
@@ -298,7 +300,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Create the wibox
     -- dxps> s.mywibox = awful.wibar({ position = "top", screen = s })
-    s.mywibox = awful.wibar({ position = "left", screen = s, width = 30 })
+    s.mywibox = awful.wibar({ position = "left", screen = s, width = 32 })
 
     -- Add widgets to the wibox
     local systray = wibox.widget.systray()
@@ -318,16 +320,28 @@ awful.screen.connect_for_each_screen(function(s)
             -- separator,
             spacer,
         },
-        s.mytasklist, -- Middle widget
+        
+        -- s.mytasklist, -- Middle widget
+        {
+                layout = wibox.container.margin,
+                margins = 4,
+                s.mytasklist,
+        },
+        
         { -- Right widgets
             layout = wibox.layout.fixed.vertical,
             -- systray,
             {
                 layout = wibox.container.margin,
-                margins = 1,
+                margins = 4,
                 systray,
             },
-            mykeyboardlayout,
+            -- mykeyboardlayout,
+            {
+                layout = wibox.container.margin,
+                margins = 6,
+                mykeyboardlayout,
+            },
             spacer,
             mytextclock,
             -- s.mylayoutbox,
