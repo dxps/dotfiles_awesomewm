@@ -44,15 +44,15 @@ end
 beautiful.init("/home/dxps/.themes/cesious.dxps/theme.lua")
 beautiful.icon_theme        = "Material-Black-Pistachio-Suru"
 -- dxps>
-beautiful.bg_normal         = "#003B4A"
-beautiful.bg_focus          = "#003B4A"
+beautiful.bg_normal         = "#033E4D"
+beautiful.bg_focus          = "#033E4D"
 beautiful.bg_systray        = "#003B4A"
 beautiful.fg_focus          = "#2BD4C0"
 beautiful.systray_icon_spacing = 1
 beautiful.titlebar_close_button_normal = "/usr/share/awesome/themes/cesious/titlebar/close_normal_adapta.png"
 beautiful.titlebar_close_button_focus  = "/usr/share/awesome/themes/cesious/titlebar/close_normal.png"
-beautiful.font              = "FiraSansCondensed 13"
-beautiful.notification_font = "FiraSansCondensed 13"
+beautiful.font              = "FiraSansCondensed 12"
+beautiful.notification_font = "FiraSansCondensed 12"
 beautiful.wallpaper = "/home/dxps/dev/dxps-gh/design-assets/wallpapers/rust-lang/rust_dark_green_512x512_3_darker.png"
 
 -- This is used later as the default terminal and editor to run.
