@@ -44,10 +44,11 @@ end
 beautiful.init("/home/dxps/.themes/cesious.dxps/theme.lua")
 beautiful.icon_theme        = "Material-Black-Pistachio-Suru"
 -- dxps>
-beautiful.bg_normal         = "#003B4A"
-beautiful.bg_focus          = "#003B4A"
-beautiful.bg_systray        = "#003B4A"
+beautiful.bg_normal         = "#033E4D"
+beautiful.bg_focus          = "#033E4D"
+beautiful.bg_systray        = "#033E4D"
 beautiful.fg_focus          = "#2BD4C0"
+beautiful.fg_normal         = "#BBE3ED"
 beautiful.systray_icon_spacing = 1
 beautiful.titlebar_close_button_normal = "/usr/share/awesome/themes/cesious/titlebar/close_normal_adapta.png"
 beautiful.titlebar_close_button_focus  = "/usr/share/awesome/themes/cesious/titlebar/close_normal.png"
@@ -113,8 +114,9 @@ myawesomemenu = {
     { "restart", awesome.restart, menubar.utils.lookup_icon("system-restart") }
 }
 myexitmenu = {
-    { "log out", function() awesome.quit() end, menubar.utils.lookup_icon("system-log-out") },
+    { "display off", "/home/dxps/apps/bin/turn-off-screens.sh", menubar.utils.lookup_icon("preferences-display") },
     { "suspend", "systemctl suspend", menubar.utils.lookup_icon("system-suspend") },
+    { "log out", function() awesome.quit() end, menubar.utils.lookup_icon("system-log-out") },
     { "hibernate", "systemctl hibernate", menubar.utils.lookup_icon("system-suspend-hibernate") },
     { "reboot", "systemctl reboot", menubar.utils.lookup_icon("system-reboot") },
     { "shutdown", "poweroff", menubar.utils.lookup_icon("system-shutdown") }
@@ -207,7 +209,7 @@ local function set_wallpaper(s)
         end
         -- dxps>
         -- gears.wallpaper.maximized(wallpaper, s, true)
-        gears.wallpaper.centered(wallpaper, s, "#00212C")
+        gears.wallpaper.centered(wallpaper, s, "#00202B")
     end
 end
 
@@ -484,7 +486,12 @@ globalkeys = gears.table.join(
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "show the menubar", group = "launcher"}),
+    
+    -- Volume
+    awful.key({}, "XF86AudioRaiseVolume", function () awful.spawn("amixer -D pulse sset Master 2%+", false) end),
+    awful.key({}, "XF86AudioLowerVolume", function () awful.spawn("amixer -D pulse sset Master 2%-", false) end),
+    awful.key({}, "XF86AudioMute", function () awful.spawn("amixer -D pulse sset Master toggle", false) end)
 )
 
 clientkeys = gears.table.join(
