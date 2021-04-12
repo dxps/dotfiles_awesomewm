@@ -52,9 +52,10 @@ beautiful.fg_normal         = "#BBE3ED"
 beautiful.systray_icon_spacing = 1
 beautiful.titlebar_close_button_normal = "/usr/share/awesome/themes/cesious/titlebar/close_normal_adapta.png"
 beautiful.titlebar_close_button_focus  = "/usr/share/awesome/themes/cesious/titlebar/close_normal.png"
-beautiful.font              = "FiraSansCondensed 12"
-beautiful.notification_font = "FiraSansCondensed 12"
-beautiful.wallpaper = "/home/dxps/dev/dxps-gh/design-assets/wallpapers/rust-lang/rust_dark_green_512x512_3_darker.png"
+beautiful.font              = "FiraSansCondensed 13"
+beautiful.notification_font = "FiraSansCondensed 13"
+-- beautiful.wallpaper = "/home/dxps/dev/dxps-gh/design-assets/wallpapers/rust-lang/rust_dark_green_512x512_3_darker.png"
+beautiful.wallpaper = "/home/dxps/dev/dxps-gh/design-assets/wallpapers/solarized/solarized_std_bg.png"
 
 -- This is used later as the default terminal and editor to run.
 browser = "exo-open --launch WebBrowser" or "firefox"
@@ -208,8 +209,8 @@ local function set_wallpaper(s)
             wallpaper = wallpaper(s)
         end
         -- dxps>
-        -- gears.wallpaper.maximized(wallpaper, s, true)
-        gears.wallpaper.centered(wallpaper, s, "#00202B")
+        gears.wallpaper.maximized(wallpaper, s, true)
+        -- gears.wallpaper.centered(wallpaper, s, "#00202B")
     end
 end
 
@@ -242,7 +243,7 @@ awful.screen.connect_for_each_screen(function(s)
 		layout = wibox.layout.fixed.vertical,
 		buttons = taglist_buttons,
 		style = {
-			font = "M+ 1mn"
+			font = "FiraSansCondensed 13"
 		},
 		widget_template = {
 			{
@@ -421,6 +422,8 @@ globalkeys = gears.table.join(
             client.focus:raise()
         end
     end),
+    --- Change keyboard layout
+    awful.key({ "Shift" }, "Alt_L", function () mykeyboardlayout.next_layout(); end),
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
@@ -610,9 +613,9 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                      size_hints_honor = false, -- Remove gaps between terminals
-                     screen = awful.screen.preferred,
+                     screen = awful.screen.focused,
                      callback = awful.client.setslave,
-                     placement = awful.placement.no_overlap+awful.placement.no_offscreen,
+                     placement = awful.placement.centered+awful.placement.no_overlap+awful.placement.no_offscreen,
                      titlebars_enabled = false
       }
     },
