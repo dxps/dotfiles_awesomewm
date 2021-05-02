@@ -15,6 +15,8 @@ local freedesktop = require("freedesktop")
 -- Enable VIM help for hotkeys widget when client with matching name is opened:
 require("awful.hotkeys_popup.keys.vim")
 
+local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -46,15 +48,13 @@ beautiful.icon_theme        = "Material-Black-Pistachio-Suru"
 -- dxps>
 beautiful.bg_normal         = "#033E4D"
 beautiful.bg_focus          = "#033E4D"
-beautiful.bg_systray        = "#033E4D"
+beautiful.bg_systray        = "#003B4A"
 beautiful.fg_focus          = "#2BD4C0"
-beautiful.fg_normal         = "#BBE3ED"
 beautiful.systray_icon_spacing = 1
 beautiful.titlebar_close_button_normal = "/usr/share/awesome/themes/cesious/titlebar/close_normal_adapta.png"
 beautiful.titlebar_close_button_focus  = "/usr/share/awesome/themes/cesious/titlebar/close_normal.png"
-beautiful.font              = "FiraSansCondensed 13"
-beautiful.notification_font = "FiraSansCondensed 13"
--- beautiful.wallpaper = "/home/dxps/dev/dxps-gh/design-assets/wallpapers/rust-lang/rust_dark_green_512x512_3_darker.png"
+beautiful.font              = "FiraSansCondensed 12"
+beautiful.notification_font = "FiraSansCondensed 12"
 beautiful.wallpaper = "/home/dxps/dev/dxps-gh/design-assets/wallpapers/solarized/solarized_std_bg.png"
 
 -- This is used later as the default terminal and editor to run.
@@ -115,9 +115,8 @@ myawesomemenu = {
     { "restart", awesome.restart, menubar.utils.lookup_icon("system-restart") }
 }
 myexitmenu = {
-    { "display off", "/home/dxps/apps/bin/turn-off-screens.sh", menubar.utils.lookup_icon("preferences-display") },
-    { "suspend", "systemctl suspend", menubar.utils.lookup_icon("system-suspend") },
     { "log out", function() awesome.quit() end, menubar.utils.lookup_icon("system-log-out") },
+    { "suspend", "systemctl suspend", menubar.utils.lookup_icon("system-suspend") },
     { "hibernate", "systemctl hibernate", menubar.utils.lookup_icon("system-suspend-hibernate") },
     { "reboot", "systemctl reboot", menubar.utils.lookup_icon("system-reboot") },
     { "shutdown", "poweroff", menubar.utils.lookup_icon("system-shutdown") }
@@ -146,7 +145,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock("  %H\n  %M")
+mytextclock = wibox.widget.textclock(" %H\n %M")
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
@@ -243,7 +242,7 @@ awful.screen.connect_for_each_screen(function(s)
 		layout = wibox.layout.fixed.vertical,
 		buttons = taglist_buttons,
 		style = {
-			font = "FiraSansCondensed 13"
+			font = "M+ 1mn"
 		},
 		widget_template = {
 			{
@@ -303,7 +302,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Create the wibox
     -- dxps> s.mywibox = awful.wibar({ position = "top", screen = s })
-    s.mywibox = awful.wibar({ position = "left", screen = s, width = 32 })
+    s.mywibox = awful.wibar({ position = "left", screen = s, width = 30 })
 
     -- Add widgets to the wibox
     local systray = wibox.widget.systray()
@@ -333,6 +332,12 @@ awful.screen.connect_for_each_screen(function(s)
         
         { -- Right widgets
             layout = wibox.layout.fixed.vertical,
+            cpu_widget({
+                width = 30,
+                step_width = 1,
+                step_spacing = 1,
+                color = '#56ABA3'
+            }),
             -- systray,
             {
                 layout = wibox.container.margin,
@@ -342,7 +347,7 @@ awful.screen.connect_for_each_screen(function(s)
             -- mykeyboardlayout,
             {
                 layout = wibox.container.margin,
-                margins = 6,
+                margins = 0,
                 mykeyboardlayout,
             },
             spacer,
@@ -422,8 +427,6 @@ globalkeys = gears.table.join(
             client.focus:raise()
         end
     end),
-    --- Change keyboard layout
-    awful.key({ "Shift" }, "Alt_L", function () mykeyboardlayout.next_layout(); end),
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
@@ -489,12 +492,7 @@ globalkeys = gears.table.join(
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"}),
-    
-    -- Volume
-    awful.key({}, "XF86AudioRaiseVolume", function () awful.spawn("amixer -D pulse sset Master 2%+", false) end),
-    awful.key({}, "XF86AudioLowerVolume", function () awful.spawn("amixer -D pulse sset Master 2%-", false) end),
-    awful.key({}, "XF86AudioMute", function () awful.spawn("amixer -D pulse sset Master toggle", false) end)
+              {description = "show the menubar", group = "launcher"})
 )
 
 clientkeys = gears.table.join(
@@ -613,9 +611,9 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                      size_hints_honor = false, -- Remove gaps between terminals
-                     screen = awful.screen.focused,
+                     screen = awful.screen.preferred,
                      callback = awful.client.setslave,
-                     placement = awful.placement.centered+awful.placement.no_overlap+awful.placement.no_offscreen,
+                     placement = awful.placement.no_overlap+awful.placement.no_offscreen,
                      titlebars_enabled = false
       }
     },
