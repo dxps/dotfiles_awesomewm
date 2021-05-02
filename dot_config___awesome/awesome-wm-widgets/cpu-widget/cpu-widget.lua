@@ -268,8 +268,8 @@ local function worker(user_args)
                         local row = wibox.widget {
                             {
                                 pid_name_rest,
-                                top = 4,
-                                bottom = 4,
+                                top = 1,
+                                bottom = 1,
                                 widget = wibox.container.margin
                             },
                             widget = wibox.container.background
