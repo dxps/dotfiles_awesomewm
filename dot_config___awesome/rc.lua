@@ -55,7 +55,7 @@ beautiful.titlebar_close_button_normal = "/usr/share/awesome/themes/cesious/titl
 beautiful.titlebar_close_button_focus  = "/usr/share/awesome/themes/cesious/titlebar/close_normal.png"
 beautiful.font              = "FiraSansCondensed 12"
 beautiful.notification_font = "FiraSansCondensed 12"
-beautiful.wallpaper = "/home/dxps/dev/dxps-gh/design-assets/wallpapers/solarized/solarized_std_bg.png"
+beautiful.wallpaper = "/home/dxps/dev/dxps-gh/design-assets/wallpapers/solarized/solarized_std_bg_lighter_3.png"
 
 -- This is used later as the default terminal and editor to run.
 browser = "exo-open --launch WebBrowser" or "firefox"
@@ -221,7 +221,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3" }, s, awful.layout.layouts[1])
+    awful.tag({ "1" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -302,12 +302,12 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Create the wibox
     -- dxps> s.mywibox = awful.wibar({ position = "top", screen = s })
-    s.mywibox = awful.wibar({ position = "left", ontop = true, screen = s, width = 32 })
+    s.mywibox = awful.wibar({ position = "left", ontop = true, screen = s, width = 33 })
 
     -- Add widgets to the wibox
     local systray = wibox.widget.systray()
     -- dxps>
-    -- (added, but it seemns not relevant for the vertical setup) 
+    -- (added, but it seems not relevant for the vertical setup) 
     systray:set_base_size (28)
     systray:set_horizontal (false)
 
@@ -316,10 +316,17 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Left widgets
             layout = wibox.layout.fixed.vertical,
             mylauncher,
-            s.mytaglist,
+            spacer,
+            spacer,
+            -- dxps: no "workspaces" (tags) used.
+            -- s.mytaglist,
             s.mypromptbox,
             -- dxps>
             -- separator,
+            spacer,
+            spacer,
+            spacer,
+            spacer,
             spacer,
         },
         
