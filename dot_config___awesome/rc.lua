@@ -302,7 +302,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Create the wibox
     -- dxps> s.mywibox = awful.wibar({ position = "top", screen = s })
-    s.mywibox = awful.wibar({ position = "left", ontop = true, screen = s, width = 30 })
+    s.mywibox = awful.wibar({ position = "left", ontop = true, screen = s, width = 32 })
 
     -- Add widgets to the wibox
     local systray = wibox.widget.systray()
@@ -333,8 +333,8 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.vertical,
             cpu_widget({
-                width = 30,
-                step_width = 1,
+                width = 40,
+                step_width = 4,
                 step_spacing = 1,
                 color = '#56ABA3'
             }),

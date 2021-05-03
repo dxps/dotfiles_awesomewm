@@ -129,7 +129,7 @@ local function worker(user_args)
         shape = gears.shape.rounded_rect,
         border_width = 1,
         border_color = beautiful.bg_normal,
-        maximum_width = 390,
+        maximum_width = 400,
         offset = { y = 15 },
         widget = {}
     }
@@ -163,10 +163,11 @@ local function worker(user_args)
             reflection = {horizontal = true},
             layout = wibox.container.mirror
         },
-        bottom = 2,
+        bottom = 8,
         color = background_color,
         widget = wibox.container.margin
     }
+    cpu_widget = wibox.container.rotate( cpu_widget, 'west' )
 
     -- This part runs constantly, also when the popup is closed.
     -- It updates the graph widget in the bar.
