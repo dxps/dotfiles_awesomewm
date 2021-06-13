@@ -49,6 +49,7 @@ beautiful.icon_theme        = "Material-Black-Pistachio-Suru"
 beautiful.bg_normal         = "#033E4D"
 beautiful.bg_focus          = "#033E4D"
 beautiful.bg_systray        = "#003B4A"
+beautiful.fg_normal         = "#A1C7C3"
 beautiful.fg_focus          = "#2BD4C0"
 beautiful.systray_icon_spacing = 1
 
