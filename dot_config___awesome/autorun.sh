@@ -41,6 +41,14 @@ run compton
 run blueman-applet
 run msm_notifier
 
+## ----------------
+## dxps: Additions.
+## ----------------
+
 run /home/dxps/apps/scripts/run_alttab.sh
+
+run /usr/bin/xscreensaver -no-splash &
+
+## run xfce4-panel --disable-wm-check
 
 

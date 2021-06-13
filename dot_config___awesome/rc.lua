@@ -51,11 +51,15 @@ beautiful.bg_focus          = "#033E4D"
 beautiful.bg_systray        = "#003B4A"
 beautiful.fg_focus          = "#2BD4C0"
 beautiful.systray_icon_spacing = 1
-beautiful.titlebar_close_button_normal = "/usr/share/awesome/themes/cesious/titlebar/close_normal_adapta.png"
-beautiful.titlebar_close_button_focus  = "/usr/share/awesome/themes/cesious/titlebar/close_normal.png"
-beautiful.font              = "FiraSansCondensed 12"
+
+--beautiful.titlebar_close_button_normal = "/usr/share/awesome/themes/cesious/titlebar/close_normal_adapta.png"
+beautiful.titlebar_close_button_normal = "/home/dxps/.themes/Solarized-Dark-Cyan-3.36/unity/close_focused_pressed.svg"
+--beautiful.titlebar_close_button_focus  = "/usr/share/awesome/themes/cesious/titlebar/close_normal.png"
+beautiful.titlebar_close_button_focus  = "/home/dxps/.themes/Solarized-Dark-Cyan-3.36/unity/close_focused_prelight.svg"
+
+beautiful.font              = "FiraSansCondensed 11"
 beautiful.notification_font = "FiraSansCondensed 12"
-beautiful.wallpaper = "/home/dxps/dev/dxps-gh/design-assets/wallpapers/solarized/solarized_std_bg_lighter_3.png"
+beautiful.wallpaper = "/home/dxps/dev/dxps-gh/design-assets/wallpapers/solarized/solarized_std_bg_3.png"
 
 -- This is used later as the default terminal and editor to run.
 browser = "exo-open --launch WebBrowser" or "firefox"
@@ -145,7 +149,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock(" %H\n %M")
+mytextclock = wibox.widget.textclock("  %H\n  %M")
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
@@ -302,7 +306,14 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Create the wibox
     -- dxps> s.mywibox = awful.wibar({ position = "top", screen = s })
-    s.mywibox = awful.wibar({ position = "left", ontop = true, screen = s, width = 33 })
+
+    function custom_shape(cr, width, height)
+        gears.shape.rounded_rect(cr, width, height, RADIUS)
+    end
+    s.mywibox = awful.wibar({ 
+        position = "left", ontop = true, screen = s, 
+        shape = custom_shape, width = 30, height=600 
+    })
 
     -- Add widgets to the wibox
     local systray = wibox.widget.systray()
@@ -315,18 +326,19 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.vertical,
         { -- Left widgets
             layout = wibox.layout.fixed.vertical,
-            mylauncher,
+            -- systray,
+            {
+                layout = wibox.container.margin,
+                margins = 4,
+                systray,
+            },
+            spacer,
+            -- mylauncher,
             spacer,
             spacer,
             -- dxps: no "workspaces" (tags) used.
             -- s.mytaglist,
             s.mypromptbox,
-            -- dxps>
-            -- separator,
-            spacer,
-            spacer,
-            spacer,
-            spacer,
             spacer,
         },
         
@@ -345,21 +357,16 @@ awful.screen.connect_for_each_screen(function(s)
                 step_spacing = 1,
                 color = '#56ABA3'
             }),
-            -- systray,
-            {
-                layout = wibox.container.margin,
-                margins = 4,
-                systray,
-            },
+            -- dxps: systray is moved up from here
+
             -- mykeyboardlayout,
             {
                 layout = wibox.container.margin,
-                margins = 0,
+                margins = 3,
                 mykeyboardlayout,
             },
             spacer,
             mytextclock,
-            -- s.mylayoutbox,
             spacer,
         },
     }
@@ -499,7 +506,25 @@ globalkeys = gears.table.join(
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "show the menubar", group = "launcher"}),
+
+    -- dxps: Show/Hide Wibox.
+     awful.key({ modkey }, "a", function ()
+             for s in screen do
+                 s.mywibox.visible = not s.mywibox.visible
+                 if s.mybottomwibox then
+                     s.mybottomwibox.visible = not s.mybottomwibox.visible
+                 end
+            end
+         end,
+         {description = "toggle wibox", group = "awesome"}),
+    -- dxps: Launch screensaver.
+    awful.key({ modkey, "Control" }, "l", 
+        function ()
+            awful.spawn("/usr/bin/xscreensaver-command -lock") 
+        end,
+        {description = "launch screensaver", group = "settings"})
+    
 )
 
 clientkeys = gears.table.join(
@@ -621,7 +646,7 @@ awful.rules.rules = {
                      screen = awful.screen.preferred,
                      callback = awful.client.setslave,
                      placement = awful.placement.no_overlap+awful.placement.no_offscreen,
-                     titlebars_enabled = false
+                     titlebars_enabled = true
       }
     },
 
@@ -649,14 +674,14 @@ awful.rules.rules = {
           "AlarmWindow",  -- Thunderbird's calendar.
           "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
         }
-      }, properties = { floating = true, titlebars_enabled = false }
+      }, properties = { floating = true, titlebars_enabled = true }
     },
 
     -- Add titlebars to normal clients.
     { rule_any = {type = { "normal" } },
-      -- dxps> hide the titlebars, 
+      -- dxps> I am still showing the titlebar, now that I can control the height.
       properties = { 
-          titlebars_enabled = false, 
+          titlebars_enabled = true, 
           placement = awful.placement.no_offscreen
       }
     },
@@ -702,6 +727,7 @@ end)
 
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
 client.connect_signal("request::titlebars", function(c)
+
     -- buttons for the titlebar
     local buttons = gears.table.join(
         awful.button({ }, 1, function()
@@ -716,11 +742,12 @@ client.connect_signal("request::titlebars", function(c)
         end)
     )
 
-    awful.titlebar(c) : setup {
+    -- dxps: Smaller titlebar height.
+    awful.titlebar(c, { size = 16 } ) : setup {
         { -- Left
             -- dxps>
             -- awful.titlebar.widget.iconwidget(c),
-            -- buttons = buttons,
+            buttons = buttons,
             layout  = wibox.layout.fixed.horizontal
         },
         { -- Middle
@@ -737,16 +764,18 @@ client.connect_signal("request::titlebars", function(c)
             -- awful.titlebar.widget.stickybutton   (c),
             -- awful.titlebar.widget.ontopbutton    (c),
             -- awful.titlebar.widget.maximizedbutton(c),
-            -- awful.titlebar.widget.closebutton    (c),
+            awful.titlebar.widget.minimizebutton (c),
+            awful.titlebar.widget.closebutton    (c),
             layout = wibox.layout.fixed.horizontal()
         },
-        layout = wibox.layout.align.horizontal
+        layout = wibox.layout.align.horizontal,
     }
-        -- Hide the menubar if we are not floating
-   -- local l = awful.layout.get(c.screen)
-   -- if not (l.name == "floating" or c.floating) then
-   --     awful.titlebar.hide(c)
-   -- end
+
+--         Hide the menubar if we are not floating
+--    local l = awful.layout.get(c.screen)
+--    if not (l.name == "floating" or c.floating) then
+--        awful.titlebar.hide(c)
+--    end
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
