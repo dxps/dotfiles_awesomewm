@@ -50,17 +50,20 @@ beautiful.bg_normal         = "#033E4D"
 beautiful.bg_focus          = "#033E4D"
 beautiful.bg_systray        = "#003B4A"
 beautiful.fg_normal         = "#A1C7C3"
-beautiful.fg_focus          = "#2BD4C0"
+beautiful.fg_focus          = "#36D8FF"
 beautiful.systray_icon_spacing = 1
 
---beautiful.titlebar_close_button_normal = "/usr/share/awesome/themes/cesious/titlebar/close_normal_adapta.png"
+beautiful.titlebar_minimize_button_normal = "/home/dxps/.themes/Solarized-Dark-Cyan-3.36/unity/minimize_focused_prelight.svg"
+beautiful.titlebar_minimize_button_focus = "/home/dxps/.themes/Solarized-Dark-Cyan-3.36/gtk-3.20/assets/radio-mixed.svg"
 beautiful.titlebar_close_button_normal = "/home/dxps/.themes/Solarized-Dark-Cyan-3.36/unity/close_focused_pressed.svg"
---beautiful.titlebar_close_button_focus  = "/usr/share/awesome/themes/cesious/titlebar/close_normal.png"
-beautiful.titlebar_close_button_focus  = "/home/dxps/.themes/Solarized-Dark-Cyan-3.36/unity/close_focused_prelight.svg"
+beautiful.titlebar_close_button_focus = "/home/dxps/.themes/Solarized-Dark-Cyan-3.36/gtk-3.20/assets/radio-checked.svg"
 
-beautiful.font              = "FiraSansCondensed 11"
+beautiful.font              = "FiraSansCondensed 12"
 beautiful.notification_font = "FiraSansCondensed 12"
 beautiful.wallpaper = "/home/dxps/dev/dxps-gh/design-assets/wallpapers/solarized/solarized_std_bg_3.png"
+
+-- dxps: Disabling the snap edge.
+awful.mouse.snap.edge_enabled = false
 
 -- This is used later as the default terminal and editor to run.
 browser = "exo-open --launch WebBrowser" or "firefox"
@@ -150,7 +153,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock("  %H\n  %M")
+mytextclock = wibox.widget.textclock(" %H\n %M")
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
@@ -281,7 +284,7 @@ awful.screen.connect_for_each_screen(function(s)
         shape  = gears.shape.rounded_bar,
     },
     layout   = {
-        spacing = 14,
+        spacing = 16,
         layout  = wibox.layout.fixed.vertical
     },
     -- Notice that there is *NO* wibox.wibox prefix, it is a template,
@@ -363,7 +366,7 @@ awful.screen.connect_for_each_screen(function(s)
             -- mykeyboardlayout,
             {
                 layout = wibox.container.margin,
-                margins = 3,
+                margins = 1,
                 mykeyboardlayout,
             },
             spacer,
@@ -752,10 +755,10 @@ client.connect_signal("request::titlebars", function(c)
             layout  = wibox.layout.fixed.horizontal
         },
         { -- Middle
-            { -- Title
-                align  = "center",
-                widget = awful.titlebar.widget.titlewidget(c)
-            },
+            --{ -- Title
+                --align  = "center",
+                --widget = awful.titlebar.widget.titlewidget(c)
+            --},
             buttons = buttons,
             layout  = wibox.layout.flex.horizontal
         },
