@@ -50,8 +50,8 @@ beautiful.bg_normal         = "#033E4D"
 beautiful.bg_focus          = "#033E4D"
 beautiful.bg_systray        = "#003B4A"
 beautiful.fg_normal         = "#A1C7C3"
-beautiful.fg_focus          = "#36D8FF"
-beautiful.systray_icon_spacing = 1
+beautiful.fg_focus          = "#14CCBE"
+beautiful.systray_icon_spacing = 4
 
 beautiful.titlebar_minimize_button_normal = "/home/dxps/.themes/Solarized-Dark-Cyan-3.36/unity/minimize_focused_prelight.svg"
 beautiful.titlebar_minimize_button_focus = "/home/dxps/.themes/Solarized-Dark-Cyan-3.36/gtk-3.20/assets/radio-mixed.svg"
@@ -316,7 +316,7 @@ awful.screen.connect_for_each_screen(function(s)
     end
     s.mywibox = awful.wibar({ 
         position = "left", ontop = true, screen = s, 
-        shape = custom_shape, width = 30, height=600 
+        shape = custom_shape, width = 30, height=700 
     })
 
     -- Add widgets to the wibox
@@ -336,14 +336,11 @@ awful.screen.connect_for_each_screen(function(s)
                 margins = 4,
                 systray,
             },
-            spacer,
             -- mylauncher,
-            spacer,
-            spacer,
+            -- spacer,
             -- dxps: no "workspaces" (tags) used.
             -- s.mytaglist,
             s.mypromptbox,
-            spacer,
         },
         
         -- s.mytasklist, -- Middle widget
