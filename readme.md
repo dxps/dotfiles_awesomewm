@@ -21,6 +21,10 @@ Firefox theme used is [Oceanic Blue](https://addons.mozilla.org/en-US/firefox/ad
 Using `Material-Black-Pistachio-Suru` icon theme (taken from [
 material-black COLORS Icon-Superpack](https://www.xfce-look.org/p/1333360/)) to be placed into `~/.icons/` directory.
 
+### Cursor Icon Theme
+
+Using `Breeze` cursor theme (taken from [here](https://www.gnome-look.org/p/999927/)) to be placed also into `~/.icons` directory.
+
 ### Colors
 
 Using `#2BD4C0` and `#022630` as terminal (lxterminal or terminator) foreground and background respectively.
